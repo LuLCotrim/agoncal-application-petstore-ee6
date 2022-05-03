@@ -1,6 +1,9 @@
 package org.agoncal.application.petstore.domain;
 
 import javax.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Antonio Goncalves

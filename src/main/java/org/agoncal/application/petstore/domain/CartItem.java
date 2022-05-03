@@ -2,6 +2,9 @@ package org.agoncal.application.petstore.domain;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Antonio Goncalves
