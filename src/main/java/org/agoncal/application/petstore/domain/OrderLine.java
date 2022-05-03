@@ -1,9 +1,9 @@
 package org.agoncal.application.petstore.domain;
 
 import javax.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Antonio Goncalves
@@ -12,6 +12,7 @@ import lombok.Setter;
  */
 
 @Entity
+@EqualsAndHashCode
 public class OrderLine {
 
     // ======================================
@@ -50,29 +51,6 @@ public class OrderLine {
     // ======================================
     // =   Methods hash, equals, toString   =
     // ======================================
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof OrderLine)) return false;
-
-        OrderLine orderLine = (OrderLine) o;
-
-        if (id != null ? !id.equals(orderLine.id) : orderLine.id != null) return false;
-        if (item != null ? !item.equals(orderLine.item) : orderLine.item != null) return false;
-        if (!quantity.equals(orderLine.quantity)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + quantity.hashCode();
-        result = 31 * result + (item != null ? item.hashCode() : 0);
-        return result;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();

@@ -8,9 +8,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Antonio Goncalves
@@ -25,6 +25,7 @@ import lombok.Setter;
         @NamedQuery(name = Item.FIND_ALL, query = "SELECT i FROM Item i")
 })
 @XmlRootElement
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Item {
 
     // ======================================
@@ -37,14 +38,14 @@ public class Item {
     @Column(nullable = false, length = 30)
     @NotNull
     @Size(min = 1, max = 30)
-    @Getter @Setter private String name;
+    @EqualsAndHashCode.Include @Getter @Setter private String name;
     @Column(length = 3000)
     @Getter @Setter private String description;
     @Column(nullable = false)
     @Price
     @Getter @Setter private Float unitCost;
     @NotEmpty
-    @Getter @Setter private String imagePath;
+    @EqualsAndHashCode.Include @Getter @Setter private String imagePath;
     @ManyToOne
     @JoinColumn(name = "product_fk", nullable = false)
     @XmlTransient
@@ -76,27 +77,6 @@ public class Item {
     // ======================================
     // =   Methods hash, equals, toString   =
     // ======================================
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Item)) return false;
-
-        Item item = (Item) o;
-
-        if (!imagePath.equals(item.imagePath)) return false;
-        if (!name.equals(item.name)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + imagePath.hashCode();
-        return result;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();

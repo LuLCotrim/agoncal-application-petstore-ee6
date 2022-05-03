@@ -4,9 +4,9 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 import java.util.List;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Antonio Goncalves
@@ -20,6 +20,7 @@ import lombok.Setter;
 @NamedQueries({
         @NamedQuery(name = Order.FIND_ALL, query = "SELECT o FROM Order o")
 })
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Order {
 
     // ======================================
@@ -31,10 +32,10 @@ public class Order {
     @Getter private Long id;
     @Column(name = "order_date", updatable = false)
     @Temporal(TemporalType.DATE)
-    @Getter private Date orderDate;
+    @EqualsAndHashCode.Include @Getter private Date orderDate;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_fk", nullable = false)
-    @Getter @Setter private Customer customer;
+    @EqualsAndHashCode.Include @Getter @Setter private Customer customer;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "t_order_order_line",
             joinColumns = {@JoinColumn(name = "order_fk")},
@@ -122,26 +123,6 @@ public class Order {
     // ======================================
     // =   Methods hash, equals, toString   =
     // ======================================
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Order)) return false;
-
-        Order order = (Order) o;
-
-        if (!customer.equals(order.customer)) return false;
-        if (orderDate != null && !orderDate.equals(order.orderDate)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = orderDate != null ? orderDate.hashCode() : 0;
-        result = 31 * result + customer.hashCode();
-        return result;
-    }
 
     @Override
     public String toString() {

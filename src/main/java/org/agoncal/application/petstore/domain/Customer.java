@@ -13,9 +13,9 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Antonio Goncalves
@@ -30,6 +30,7 @@ import lombok.Setter;
         @NamedQuery(name = Customer.FIND_ALL, query = "SELECT c FROM Customer c")
 })
 @XmlRootElement
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Customer implements Serializable {
 
     // ======================================
@@ -41,7 +42,7 @@ public class Customer implements Serializable {
     @Getter private Long id;
     @Column(unique = true, nullable = false, length = 10)
     @Login
-    @Getter @Setter private String login;
+    @EqualsAndHashCode.Include @Getter @Setter private String login;
     @Column(nullable = false, length = 10)
     @NotNull
     @Size(min = 1, max = 10)
@@ -141,23 +142,6 @@ public class Customer implements Serializable {
     // ======================================
     // =   Methods hash, equals, toString   =
     // ======================================
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Customer)) return false;
-
-        Customer customer = (Customer) o;
-
-        if (!login.equals(customer.login)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return login.hashCode();
-    }
 
     @Override
     public String toString() {

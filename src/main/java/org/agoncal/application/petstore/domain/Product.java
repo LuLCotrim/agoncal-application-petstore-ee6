@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Antonio Goncalves
@@ -25,6 +25,7 @@ import lombok.Setter;
         @NamedQuery(name = Product.FIND_ALL, query = "SELECT p FROM Product p")
 })
 @XmlRootElement
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Product {
 
     // ======================================
@@ -37,7 +38,7 @@ public class Product {
     @Column(nullable = false, length = 30)
     @NotNull
     @Size(min = 1, max = 30)
-    @Getter @Setter private String name;
+    @EqualsAndHashCode.Include @Getter @Setter private String name;
     @Column(nullable = false)
     @Getter @Setter private String description;
     @ManyToOne
@@ -78,23 +79,6 @@ public class Product {
     // ======================================
     // =   Methods hash, equals, toString   =
     // ======================================
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Product)) return false;
-
-        Product product = (Product) o;
-
-        if (!name.equals(product.name)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return name.hashCode();
-    }
 
     @Override
     public String toString() {

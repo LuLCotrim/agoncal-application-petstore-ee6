@@ -12,7 +12,6 @@ import javax.inject.Named;
 import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
 import java.io.Serializable;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
