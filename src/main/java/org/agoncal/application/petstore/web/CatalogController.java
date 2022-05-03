@@ -31,15 +31,15 @@ public class CatalogController extends Controller implements Serializable {
     @Inject
     private CatalogService catalogService;
 
-    private String categoryName;
-    private Long productId;
-    private Long itemId;
+    @Getter @Setter private String categoryName;
+    @Getter @Setter private Long productId;
+    @Getter @Setter private Long itemId;
 
-    private String keyword;
-    private Product product;
-    private Item item;
-    private List<Product> products;
-    private List<Item> items;
+    @Getter @Setter private String keyword;
+    @Getter @Setter private Product product;
+    @Getter @Setter private Item item;
+    @Getter private List<Product> products;
+    @Getter private List<Item> items;
 
     // ======================================
     // =              Public Methods        =
@@ -64,65 +64,5 @@ public class CatalogController extends Controller implements Serializable {
     public String doSearch() {
         items = catalogService.searchItems(keyword);
         return "searchresult.faces?keyword=" + keyword + "&faces-redirect=true";
-    }
-
-    // ======================================
-    // =         Getters & setters          =
-    // ======================================
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public String getKeyword() {
-        return keyword;
-    }
-
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public Long getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
     }
 }

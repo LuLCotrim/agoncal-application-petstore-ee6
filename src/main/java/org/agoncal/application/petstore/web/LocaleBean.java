@@ -15,15 +15,11 @@ import java.util.Locale;
 public class LocaleBean implements Serializable {
 
     @Produces
-    private Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
+    @Getter private Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
 
     // ======================================
     // =          Business methods          =
     // ======================================
-
-    public Locale getLocale() {
-        return locale;
-    }
 
     public String getLanguage() {
         return locale.getLanguage();

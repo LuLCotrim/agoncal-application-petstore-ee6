@@ -40,7 +40,7 @@ public class AccountController extends Controller implements Serializable {
 
     @Produces
     @LoggedIn
-    private Customer loggedinCustomer;
+    @Getter @Setter private Customer loggedinCustomer;
 
     @Inject
     @SessionScoped
@@ -114,13 +114,5 @@ public class AccountController extends Controller implements Serializable {
 
     public boolean isLoggedIn() {
         return loggedinCustomer != null;
-    }
-
-    public Customer getLoggedinCustomer() {
-        return loggedinCustomer;
-    }
-
-    public void setLoggedinCustomer(Customer loggedinCustomer) {
-        this.loggedinCustomer = loggedinCustomer;
     }
 }

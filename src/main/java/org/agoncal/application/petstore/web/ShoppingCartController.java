@@ -38,11 +38,11 @@ public class ShoppingCartController extends Controller implements Serializable {
     @Inject
     private OrderService orderBean;
     @Inject
-    private Conversation conversation;
+    @Getter private Conversation conversation;
 
     private List<CartItem> cartItems;
-    private CreditCard creditCard = new CreditCard();
-    private Order order;
+    @Getter @Setter private CreditCard creditCard = new CreditCard();
+    @Getter @Setter private Order order;
 
     // ======================================
     // =              Public Methods        =
@@ -134,27 +134,6 @@ public class ShoppingCartController extends Controller implements Serializable {
 
     public Customer getCustomer() {
         return loggedInCustomer.get();
-    }
-
-
-    public CreditCard getCreditCard() {
-        return creditCard;
-    }
-
-    public void setCreditCard(CreditCard creditCard) {
-        this.creditCard = creditCard;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Conversation getConversation() {
-        return conversation;
     }
 
     public CreditCardType[] getCreditCardTypes() {

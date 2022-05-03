@@ -17,12 +17,12 @@ public class OrderLine {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Getter private Long id;
     @Column(nullable = false)
-    private Integer quantity;
+    @Getter @Setter private Integer quantity;
     @OneToOne
     @JoinColumn(name = "item_fk", nullable = false)
-    private Item item;
+    @Getter @Setter private Item item;
 
     // ======================================
     // =            Constructors            =
@@ -42,30 +42,6 @@ public class OrderLine {
 
     public Float getSubTotal() {
         return item.getUnitCost() * quantity;
-    }
-
-    // ======================================
-    // =         Getters & setters          =
-    // ======================================
-
-    public Long getId() {
-        return id;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
     }
 
     // ======================================
